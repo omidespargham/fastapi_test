@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from db.database import engine
-from models import user_model
+from models import user_model,advert_models
 from routers.accounts import accounts
 from routers.advert import advert
 from auth.oauth2 import oauth_scheme
@@ -11,6 +11,7 @@ app = FastAPI()
 
 
 user_model.Base.metadata.create_all(engine)
+advert_models.Base.metadata.create_all(engine)
 app.include_router(accounts.router)
 app.include_router(authentication.router)
 app.include_router(advert.router)

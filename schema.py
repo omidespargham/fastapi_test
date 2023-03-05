@@ -20,4 +20,18 @@ class UserVerify(BaseModel):
 
 
 
+# advert schemas ######################################################
 
+
+class AdvertBase(BaseModel):
+    title:str
+    description:str
+    price:str
+    phone_number:str
+    user_id:int
+
+class AdvertShow(AdvertBase):
+    id:int
+
+    class Config:
+        orm_mode = True
