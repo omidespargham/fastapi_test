@@ -24,3 +24,11 @@ def make_advert(request:schema.AdvertBase,db:Session=Depends(get_db)):
 def get_all_adverts(user_id:int,db:Session = Depends(get_db)):
     adverts = db.query(Advert).filter(Advert.user_id == user_id).all()
     return adverts
+
+
+@router.get("/advert-detail/{advert_id}",response_model=schema.AdvertShow)
+def advert_detail(advert_id:int,db:Session = Depends(get_db)):
+    advert = db.query(Advert).filter(Advert.id == advert_id).first()
+    if not advert:
+        raise HTTPException(status_code=404,detail="advert with this id didnt exist !")
+    return advert
